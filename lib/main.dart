@@ -4,6 +4,7 @@ import 'package:diplomka/user_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'admin/admin_panel_page.dart';
 import 'create_project.dart';
 import 'create_project_after.dart';
 import 'create_project_now.dart';
@@ -41,12 +42,12 @@ class MyApp extends StatelessWidget {
             //   borderRadius: BorderRadius.all(Radius.circular(90))
           ),
           labelStyle: TextStyle(
-          fontSize: 35,
-          decorationColor: Colors.red,
+            fontSize: 35,
+            decorationColor: Colors.red,
           ),
         ),
       ),
-      home: HiPage(),
+      home: AdminPanelPage(),
       routes: {
         '/hi_page': (context) => HiPage(),
         '/register_page': (context) => RegisterPage(),
@@ -66,8 +67,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
