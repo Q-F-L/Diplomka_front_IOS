@@ -1,5 +1,6 @@
 import 'package:diplomka/ProjectsConvertJSON.dart';
 import 'package:flutter/material.dart';
+import 'global.dart' as global;
 
 class ListProjectPage extends StatefulWidget {
   _ListProjectPage createState() => _ListProjectPage();
@@ -61,41 +62,38 @@ class _ListProjectPage extends State<ListProjectPage> {
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () {
-                                  Project project = Project(
-                                      id: snapshot.data!.projects[index].id,
-                                      topic:
-                                          snapshot.data!.projects[index].topic,
-                                      title:
-                                          snapshot.data!.projects[index].title,
-                                      now_description: snapshot.data!
-                                          .projects[index].now_description,
-                                      now_video: snapshot
-                                          .data!.projects[index].now_video,
-                                      now_photo: snapshot
-                                          .data!.projects[index].now_photo,
-                                      need_description: snapshot.data!
-                                          .projects[index].need_description,
-                                      need_video: snapshot
-                                          .data!.projects[index].need_video,
-                                      need_photo: snapshot
-                                          .data!.projects[index].need_photo,
-                                      will_description: snapshot.data!
-                                          .projects[index].will_description,
-                                      rating:
-                                          snapshot.data!.projects[index].rating,
-                                      status:
-                                          snapshot.data!.projects[index].status,
-                                      discussion_id: snapshot
-                                          .data!.projects[index].discussion_id,
-                                      user_id: snapshot
-                                          .data!.projects[index].user_id,
-                                      created_at: snapshot
-                                          .data!.projects[index].created_at,
-                                      updated_at: snapshot
-                                          .data!.projects[index].updated_at);
+                                      global.id = snapshot.data!.projects[index].id;
+                                      global.topic = snapshot.data!.projects[index].topic;
+                                      global.title=
+                                          snapshot.data!.projects[index].title;
+                                      global.now_description= snapshot.data!
+                                          .projects[index].now_description;
+                                      global.now_video= snapshot
+                                          .data!.projects[index].now_video;
+                                      global.now_photo= snapshot
+                                          .data!.projects[index].now_photo;
+                                      global.need_description= snapshot.data!
+                                          .projects[index].need_description;
+                                      global.need_video= snapshot
+                                          .data!.projects[index].need_video;
+                                      global.need_photo= snapshot
+                                          .data!.projects[index].need_photo;
+                                      global.will_description= snapshot.data!
+                                          .projects[index].will_description;
+                                      global.rating=
+                                          snapshot.data!.projects[index].rating;
+                                      global.status=
+                                          snapshot.data!.projects[index].status;
+                                      global.discussion_id= snapshot
+                                          .data!.projects[index].discussion_id;
+                                      global.project_user_id= snapshot
+                                          .data!.projects[index].user_id;
+                                      global.created_at= snapshot
+                                          .data!.projects[index].created_at;
+                                      global.updated_at= snapshot
+                                          .data!.projects[index].updated_at;
                                   Navigator.pushNamed(
-                                      context, '/detail_project_page',
-                                      arguments: project);
+                                      context, '/detail_project_page');
                                 },
                                 child: Table(
                                   border: TableBorder.all(),
@@ -131,7 +129,7 @@ class _ListProjectPage extends State<ListProjectPage> {
                                               height: 15,
                                             ),
                                             Text(
-                                              '${snapshot.data?.projects[index].user_id}',
+                                              '${snapshot.data?.projects[index].rating}/5',
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   color: Color.fromRGBO(

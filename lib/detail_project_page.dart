@@ -1,6 +1,8 @@
 import 'package:diplomka/UserConvertJSON.dart';
 import 'package:diplomka/ProjectsConvertJSON.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'global.dart' as global;
 
 class DetailProjectPage extends StatefulWidget {
   const DetailProjectPage({Key? key}) : super(key: key);
@@ -10,7 +12,8 @@ class DetailProjectPage extends StatefulWidget {
 }
 
 class _DetailProjectPage extends State<DetailProjectPage> {
-  late Project project;
+  // late Object? project;
+  int _rating = 0;
   @override
   void initState() {
     super.initState();
@@ -18,8 +21,8 @@ class _DetailProjectPage extends State<DetailProjectPage> {
 
   @override
   Widget build(BuildContext context) {
-    RouteSettings settings = ModalRoute.of(context)!.settings;
-    project = settings.arguments as Project;
+    // RouteSettings settings = ModalRoute.of(context)!.settings;
+    // project = settings.arguments;
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(top: 30),
@@ -73,7 +76,7 @@ class _DetailProjectPage extends State<DetailProjectPage> {
                           height: 30,
                         ),
                         Text(
-                          '${project.now_description}',
+                          '${global.now_description}',
                           style: TextStyle(
                               fontSize: 20,
                               color: Color.fromRGBO(32, 86, 146, 1),
@@ -119,7 +122,7 @@ class _DetailProjectPage extends State<DetailProjectPage> {
                           height: 30,
                         ),
                         Text(
-                          'asd',
+                          '${global.need_description}',
                           style: TextStyle(
                               fontSize: 20,
                               color: Color.fromRGBO(32, 86, 146, 1),
@@ -165,7 +168,7 @@ class _DetailProjectPage extends State<DetailProjectPage> {
                           height: 30,
                         ),
                         Text(
-                          'asd',
+                          '${global.will_description}',
                           style: TextStyle(
                               fontSize: 20,
                               color: Color.fromRGBO(32, 86, 146, 1),
@@ -193,19 +196,95 @@ class _DetailProjectPage extends State<DetailProjectPage> {
                           children: [
                             Expanded(child: Container()),
                             Expanded(
-                              child: Image.asset('assets/Star_active.png'),
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _rating = 1;
+                                  });
+                                },
+                                icon: (_rating >= 1 ? Icon(
+                                  Icons.star,
+                                  size: 45,
+                                  color: Colors.yellow,
+                                ) : Icon(
+                                  Icons.star_border,
+                                  size: 45,
+                                  color: Color.fromARGB(255, 41, 108, 163),
+                                ))
+                              ),
                             ),
                             Expanded(
-                              child: Image.asset('assets/Star_active.png'),
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _rating = 2;
+                                  });
+                                },
+                                icon: (_rating >= 2 ? Icon(
+                                  Icons.star,
+                                  size: 45,
+                                  color: Colors.yellow,
+                                ) : Icon(
+                                  Icons.star_border,
+                                  size: 45,
+                                  color: Color.fromARGB(255, 41, 108, 163),
+                                ))
+                              ),
                             ),
                             Expanded(
-                              child: Image.asset('assets/Star_active.png'),
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _rating = 3;
+                                  });
+                                },
+                                icon: (_rating >= 3 ? Icon(
+                                  Icons.star,
+                                  size: 45,
+                                  color: Colors.yellow,
+                                ) : Icon(
+                                  Icons.star_border,
+                                  size: 45,
+                                  color: Color.fromARGB(255, 41, 108, 163),
+                                ))
+                              ),
                             ),
                             Expanded(
-                              child: Image.asset('assets/Star_active.png'),
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _rating = 4;
+                                  });
+                                },
+                                icon: (_rating >= 4 ? Icon(
+                                  Icons.star,
+                                  size: 45,
+                                  color: Colors.yellow,
+                                ) : Icon(
+                                  Icons.star_border,
+                                  size: 45,
+                                  color: Color.fromARGB(255, 41, 108, 163),
+                                ))
+                              ),
                             ),
                             Expanded(
-                              child: Image.asset('assets/Star_pasiv.png'),
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _rating = 5;
+                                    getRating();
+                                  });
+                                },
+                                icon: (_rating >= 5 ? Icon(
+                                  Icons.star,
+                                  size: 45,
+                                  color: Colors.yellow,
+                                ) : Icon(
+                                  Icons.star_border,
+                                  size: 45,
+                                  color: Color.fromARGB(255, 41, 108, 163),
+                                ))
+                              ),
                             ),
                             Expanded(child: Container()),
                           ],
@@ -256,5 +335,20 @@ class _DetailProjectPage extends State<DetailProjectPage> {
         ),
       ),
     );
+  }
+  
+  Future getRating() async {
+    final response = await http.post(
+        Uri.parse('http://didpisdp.beget.tech/api/login'),
+        body: {
+          "rating": _rating,
+        },
+        headers: {'Accept':'application/json'}
+    );
+    if (response.statusCode == 200) {
+      
+    } else {
+      throw Exception('Error: ${response.reasonPhrase}');
+    }
   }
 }

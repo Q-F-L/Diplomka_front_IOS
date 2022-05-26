@@ -2,6 +2,7 @@ import 'package:diplomka/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'global.dart' as global;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -217,9 +218,11 @@ class _LoginPage extends State<LoginPage> {
     print(response.body);
     if (response.statusCode == 200) {
       user = Auth.fromJson(json.decode(response.body));
-      token = user.token;
-      user_id = user.user_id;
-      Navigator.pushNamed(context, '/menu_page', arguments: user);
+      global.email = email;
+      global.password = password;
+      global.token = user.token;
+      global.user_id = user.user_id;
+      Navigator.pushNamed(context, '/menu_page');
       return user;
     } else {
       throw Exception('Error: ${response.reasonPhrase}');
