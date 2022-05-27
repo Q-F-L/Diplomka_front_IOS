@@ -76,7 +76,6 @@ class AdminPanelPage extends StatelessWidget {
             // padding: MaterialStateProperty.all(EdgeInsets.all(20))
           ),
           onPressed: () {
-            getLocalAdmin(apiRoute);
             Navigator.pushNamed(context, '$navigatorRoute');
           },
           child: Text(
@@ -85,6 +84,4 @@ class AdminPanelPage extends StatelessWidget {
           )),
     );
   }
-
-  getLocalAdmin(route) {}
 }
